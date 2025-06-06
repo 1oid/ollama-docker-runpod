@@ -4,10 +4,11 @@ WORKDIR /app
 COPY . .
 
 RUN apt update
-RUN apt install -y python3 python3-pip wget
+RUN apt install -y python3 python3-pip wget git
 RUN pip3 install -r requirements.txt
 RUN wget "https://huggingface.co/EZTEAM/EZ-PoC-Llama-3.1-8B-GGUF/resolve/main/EZ-PoC-Llama-3.1-8B.Q5_K_M.gguf"
-RUN cat > /app/poc.mf << EOF
+RUN echo 1 && \
+cat > poc.mf << 'EOF'
 FROM ./EZ-PoC-Llama-3.1-8B.Q5_K_M.gguf
 
 SYSTEM "将以下描述转换成yaml poc插件，只返回yaml数据，不返回其他"
