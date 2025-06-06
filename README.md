@@ -1,1 +1,1 @@
-# ollama-docker-runpod
+# ollama-docker-runpod for serverless
