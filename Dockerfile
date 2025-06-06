@@ -3,30 +3,13 @@ WORKDIR /app
 
 COPY . .
 
+RUN echo RlJPTSAuL0VaLVBvQy1MbGFtYS0zLjEtOEIuUTVfS19NLmdndWYKClNZU1RFTSAiBuULz/BsYhB5YW1sIHBvY9L2DOrU3nlhbWxwbgwN1N521iIKClRFTVBMQVRFICIiInt7IGlmIC5TeXN0ZW0gfX08fHN0YXJ0X2hlYWRlcl9pZHw+c3lzdGVtPHxlbmRfaGVhZGVyX2lkfD4KCnt7IC5TeXN0ZW0gfX08fGVvdF9pZHw+e3sgZW5kIH19e3sgaWYgLlByb21wdCB9fTx8c3RhcnRfaGVhZGVyX2lkfD51c2VyPHxlbmRfaGVhZGVyX2lkfD4KCnt7IC5Qcm9tcHQgfX08fGVvdF9pZHw+e3sgZW5kIH19PHxzdGFydF9oZWFkZXJfaWR8PmFzc2lzdGFudDx8ZW5kX2hlYWRlcl9pZHw+Cgp7eyAuUmVzcG9uc2UgfX08fGVvdF9pZHw+IiIiCgpQQVJBTUVURVIgc3RvcCAiPHxzdGFydF9oZWFkZXJfaWR8PiIKUEFSQU1FVEVSIHN0b3AgIjx8ZW5kX2hlYWRlcl9pZHw+IgpQQVJBTUVURVIgc3RvcCAiPHxlb3RfaWR8PiIKUEFSQU1FVEVSIHN0b3AgIjx8cmVzZXJ2ZWRfc3BlY2lhbF90b2tlbiIKCgpQQVJBTUVURVIgdGVtcGVyYXR1cmUgMA== | base64 -d > poc.mf
+RUN cat poc.mf
 RUN apt update
 RUN apt install -y python3 python3-pip wget git
 RUN pip3 install -r requirements.txt
 RUN wget "https://huggingface.co/EZTEAM/EZ-PoC-Llama-3.1-8B-GGUF/resolve/main/EZ-PoC-Llama-3.1-8B.Q5_K_M.gguf"
-RUN echo 1 && \
-cat > poc.mf << 'EOF'
-FROM ./EZ-PoC-Llama-3.1-8B.Q5_K_M.gguf
 
-SYSTEM "将以下描述转换成yaml poc插件，只返回yaml数据，不返回其他"
-
-TEMPLATE """{{ if .System }}<|start_header_id|>system<|end_header_id|>
-
-{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
-
-{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
-
-{{ .Response }}<|eot_id|>"""
-
-PARAMETER stop "<|start_header_id|>"
-PARAMETER stop "<|end_header_id|>"
-PARAMETER stop "<|eot_id|>"
-PARAMETER stop "<|reserved_special_token"
-PARAMETER temperature 0
-EOF
 
 RUN ollama create poc-llama3.1-8bq5km -f poc.mf
 
