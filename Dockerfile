@@ -9,7 +9,7 @@ RUN apt install -y python3 python3-pip wget git
 RUN pip3 install -r requirements.txt
 RUN wget "https://huggingface.co/EZTEAM/EZ-PoC-Llama-3.1-8B-GGUF/resolve/main/EZ-PoC-Llama-3.1-8B.Q5_K_M.gguf"
 
-
+RUN nohup ollama server &
 RUN ollama create poc-llama3.1-8bq5km -f poc.mf
 
 CMD ["python3", "-u", "handler.py"]
