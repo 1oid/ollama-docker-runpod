@@ -24,4 +24,6 @@ RUN wget "https://huggingface.co/EZTEAM/EZ-PoC-Llama-3.1-8B-GGUF/resolve/main/EZ
 
 RUN nohup bash -c "ollama serve &" && sleep 5 && ollama create poc-llama3.1-8bq5km -f poc.mf
 
-CMD ["python3", "-u", "handler.py"]
+RUN chmod +x start.sh
+
+CMD ["bash", "start.sh"]
