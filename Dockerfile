@@ -1,4 +1,4 @@
-FROM nvidia/12.2.2-runtime-ubuntu22.04
+FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04
 ENV OLLAMA_HOST=0.0.0.0:11434
 WORKDIR /app
 
@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     wget \
     python3 \
     python3-pip \
-    python3-venv \
     git \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
