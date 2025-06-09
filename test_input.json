@@ -1,3 +1,8 @@
 {
-    "input": "Hello, world!"
-}
+    "path": "/api/generate",
+    "input": {
+      "model": "poc-llama3.1-8bq5km",
+      "prompt": "写一个PoC，请求/path.txt， 判断响应是否包含123456，并且状态码是否等于200",
+      "stream": false
+    }
+  }
